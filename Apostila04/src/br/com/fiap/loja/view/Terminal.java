@@ -1,5 +1,6 @@
 package br.com.fiap.loja.view;
 
+import br.com.fiap.loja.model.Fornecedor;
 import br.com.fiap.loja.model.Produto;
 import java.util.Scanner;
 
@@ -9,42 +10,69 @@ public class Terminal {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
+        //Ler as informações do produto
+        System.out.println("Digite o preço do produto");
+        double preco = entrada.nextDouble();
+
         System.out.println("Digite o nome do produto");
-        double valor = entrada.nextDouble();
+        String nomeProduto = entrada.next() + entrada.nextLine();
 
         System.out.println("Digite o código do produto");
         int codigo = entrada.nextInt();
 
         System.out.println("O produto está disponivel? (true/false");
-        boolean disponivel = entrada.hasNextBoolean();
+        boolean disponivel = entrada.nextBoolean();
 
+        //ler os dados do fornecedor
+        System.out.println("Digite o cnpj do fornecedor");
+        String nomeFornecedor = entrada.next() + entrada.nextLine();
+
+        System.out.println("Digite o nome do fornecedor");
+        String numeroCnpj = entrada.next() + entrada.nextLine();
+
+
+        //Instanciar a classe produto
         Produto product = new Produto();
 
-        product.nome = "";
-        product.preco = valor;
+        //Instanciar o fornecedor
+        Fornecedor f = new Fornecedor();
+
+        //Colocar as informações do fornecedor
+        f.cnpj = numeroCnpj;
+        f.nome = nomeFornecedor;
+
+        //Exibir as informções do fornecedor
+        product.fornecedor = f;
+
+
+        //Colocar as informações do objeto produto
+        product.nome = nomeProduto;
+        product.preco = preco ;
         product.codigo = codigo;
         product.disponivel = disponivel;
 
-        System.out.println(product.nome);
+        //Exibir as informções do objeto produto
+        System.out.println("nome: " + product.nome);
+        System.out.println("preço: " + product.preco);
+        System.out.println("produto: " + product.codigo);
+        System.out.println("disponivel: " + product.disponivel);
+
+        //Exibir as informções do objeto do fornecedor
+        System.out.println("cnpj: " + product.fornecedor.cnpj);
+        System.out.println("nome fornecedor: " + product.fornecedor.nome);
 
 
 
+        //Metodo
+        double promocao = product.calcularDesconto();
+        System.out.println("Desconto: " + promocao);
 
+        System.out.println("Qual a % de aumento");
+        double porcentagem = entrada.nextDouble();
 
+        product.aumentarPreco(porcentagem);
 
-
-
-
-
-        //Ler as informações do Produto (sem fornecedor por enquanto)
-
-        //Instanciar a classe produto
-
-    //Colocar as informações no objeto produto
-
-    //Exibir as informações do objeto produto
-
-
+        System.out.println("Novo preco: " + product.preco);
 
 
 
